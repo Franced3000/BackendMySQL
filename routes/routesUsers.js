@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { findAll, findById, postById, updateById, deleteById } = require('../controller/userController');
+const { findAll, findById, postById, updateById, deleteById } = require('../controllers/userController');
 
 router.get('/:id', findById);
 router.get('/', findAll);
