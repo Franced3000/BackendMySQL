@@ -1,0 +1,17 @@
+{
+  "name": "backendsql",
+  "version": "1.0.0",
+  "description": "backend per l'inserimento e visualizzazione di un database di libri con MySQL",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Francesco Spata",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mysql2": "^3.10.0",
+    "sequelize": "^6.37.3"
+  }
+}
