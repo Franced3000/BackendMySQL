@@ -1,10 +1,11 @@
 const router = require('express').Router();
-const { findAll, findById, postById, updateById, deleteById } = require('../controllers/userController');
+const { findAll, findById, register, updateById, verifyToken, deleteById, login } = require('../controllers/userController');
 
-router.get('/:id', findById);
-router.get('/', findAll);
-router.post('/', postById);
-router.put('/:id', updateById);
-router.delete('/:id', deleteById);
+router.post('/register', register);
+router.post('/login', login);
+router.get('/searchUser:id', verifyToken, findById);
+router.get('/searchAllUser', verifyToken, findAll);
+router.put('/:id', verifyToken, updateById);
+router.delete('/:id', verifyToken, deleteById);
 
 module.exports = router;

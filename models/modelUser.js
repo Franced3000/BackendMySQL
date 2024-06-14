@@ -1,4 +1,5 @@
 const { Sequelize, DataTypes } = require('sequelize');
+const bcrypt =require('bcrypt');
 require('dotenv').config();
 
 const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
@@ -20,6 +21,10 @@ const Utente = sequelize.define('Utente', {
     type: DataTypes.STRING,
     allowNull: false,
     unique: true
+  },  
+  password: {
+    type: DataTypes.STRING,
+    allowNull: false,
   },
   createdAt: {
     type: DataTypes.DATE,
