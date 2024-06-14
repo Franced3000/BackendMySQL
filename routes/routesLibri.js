@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const Libro = require('../models/modelLibro');
+const { verifyToken } = require('../controllers/userController');
 
 // Crea un nuovo libro
-router.post('/', async (req, res) => {
+router.post('/', verifyToken, async (req, res) => {
   try {
     const libro = req.body;
     const result = await Libro.create({
@@ -25,7 +26,7 @@ router.post('/', async (req, res) => {
 });
 
 // Get tutti i libri
-router.get('/', async (req, res) => {
+router.get('/', verifyToken, async (req, res) => {
   try {
     const libri = await Libro.findAll();
     res.json(libri);
@@ -36,7 +37,7 @@ router.get('/', async (req, res) => {
 });
 
 // Get un singolo libro
-router.get('/:id', async (req, res) => {
+router.get('/:id', verifyToken, async (req, res) => {
   const id = req.params.id;
   try {
     const libro = await Libro.findByPk(id);
@@ -52,7 +53,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // Aggiorna un libro
-router.put('/:id', async (req, res) => {
+router.put('/:id', verifyToken, async (req, res) => {
   const id = req.params.id;
   try {
     const libro = await Libro.findByPk(id);
@@ -70,7 +71,7 @@ router.put('/:id', async (req, res) => {
 });
 
 // Elimina un libro
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', verifyToken, async (req, res) => {
   const id = req.params.id;
   try {
     const libro = await Libro.findByPk(id);

@@ -7,8 +7,9 @@ const jwt = require('jsonwebtoken');
 
 async function register(req, res) {
   try {
-    const { name, email, password } = req.body;
-    const user = await User.create({ name, email, password });
+    const { nome, email, password } = req.body;
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const user = await Utente.create({ nome, email, password: hashedPassword });
     res.status(201).json(user);
   } catch (error) {
     console.log(error);
@@ -19,7 +20,7 @@ async function register(req, res) {
 async function login(req, res) {
   try {
     const { email, password } = req.body;
-    const user = await User.findOne({ where: { email } });
+    const user = await Utente.findOne({ where: { email } });
     if (!user) {
       return res.status(404).send({ message: 'Utente non trovato' });
     }
@@ -109,7 +110,6 @@ const deleteById = async (req, res) => {
 module.exports = {
   findAll,
   findById,
-  postById,
   updateById,
   deleteById,
   register,
